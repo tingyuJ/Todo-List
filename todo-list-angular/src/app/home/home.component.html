@@ -1,0 +1,45 @@
+<br>
+
+<div *ngIf="!isLoggedIn">
+    <h1>TO-DO LIST</h1>
+    <br>
+    <h4>This is a side project made with</h4>
+    <h3>Angular + .Net Web API + MongoDB</h3>
+    <h4>by Tingyu Jiang.</h4>
+    <br><br>
+    <a routerLink="/Login">Click here to start!</a>
+    <br>
+</div>
+
+<div class="list" *ngIf="isLoggedIn">
+    <br><br>
+    <table>
+        <thead>
+            <tr>
+            <th></th>
+            <th>TO-DO</th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngFor="let item of listItems; let i = index">
+                <tr (focus)="pointedRow(i)" (mouseenter)="pointedRow(i)"  (mouseleave)="leaveRow()">
+                    <td class="checkbox" (click)="editItem(i)">
+                        <input type="checkbox" *ngIf="item.checked != null"
+                        [(ngModel)]="item.checked" [checked]="item.checked">
+                    </td>
+                    <td>
+                        <input type="text" class="text-input" [ngClass]="item.checked ? 'cross':''" 
+                        [(ngModel)]="item.text" #item.id (keydown.enter)="hitEnter($event)" (blur)="editItem(i)">
+                    </td>
+                    <td class="delete" (click)="delete(i)"
+                    *ngIf="currentRow == i && currentRow != this.listItems.length-1">
+                        x
+                    </td>
+                </tr>
+            </ng-container>
+        </tbody>
+    </table>
+
+    <br><br><br><br><br><br><br>
+
+</div>

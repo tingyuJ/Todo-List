@@ -1,0 +1,24 @@
+<br>
+<h1>LOG IN</h1>
+<span>Automaticly sign you up if the username isn't signed up already.</span>
+
+<br><br><br><br>
+
+<form #loginForm="ngForm" (ngSubmit)="submit()">
+    <div class="feild">
+        <span>USERNAME: </span>
+        <input type="text" name="username" id="username" ngModel required
+        (keydown.space)="$event.preventDefault()">
+    </div>
+    <div class="feild">
+        <span>PASSWORD: </span>
+        <input type="password" name="password" id="password" ngModel required
+        (keydown.space)="$event.preventDefault()">
+    </div>
+    <br>
+    <div class="error" *ngIf="usernameRequired">USERNAME IS REQUIRED.</div>
+    <div class="error" *ngIf="passwordRequired">PASSWORD IS REQUIRED.</div>
+    <div class="error" *ngIf="passwordError">PASSWORD IS INCORRECT.</div>
+    <br><br>
+    <button class="btn" type="submit">LOG IN / SIGN UP</button>
+</form>

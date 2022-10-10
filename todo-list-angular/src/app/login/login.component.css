@@ -1,0 +1,23 @@
+.feild {
+    margin-bottom: 10px;
+}
+
+.feild input {
+    border: none;
+    font-family: courier;
+    font-size: inherit;
+}
+
+.error {
+    color: red;
+}
+
+.btn {
+    border: none;
+    background-color: #ccb58a;
+    border-radius: 4px;
+    height: 30px;
+    font-weight: bold;
+    width: 160px;
+    font-family: Courier;
+}
