@@ -1,32 +1,32 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
 # Compiled output
-dist
-tmp
-out-tsc
-bazel-out
+/todo-list-angulardist
+/todo-list-angulartmp
+/todo-list-angularout-tsc
+/todo-list-angularbazel-out
 
 # Node
 /todo-list-angular/node_modules
-npm-debug.log
-yarn-error.log
+/todo-list-angularnpm-debug.log
+/todo-list-angularyarn-error.log
 
 # IDEs and editors
-.idea/
-.project
-.classpath
-.c9/
-*.launch
-.settings/
-*.sublime-workspace
+/todo-list-angular.idea/
+/todo-list-angular.project
+/todo-list-angular.classpath
+/todo-list-angular.c9/
+/todo-list-angular*.launch
+/todo-list-angular.settings/
+/todo-list-angular*.sublime-workspace
 
 # Visual Studio Code
-.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
-.history/*
+/todo-list-angular.vscode/*
+/todo-list-angular!.vscode/settings.json
+/todo-list-angular!.vscode/tasks.json
+/todo-list-angular!.vscode/launch.json
+/todo-list-angular!.vscode/extensions.json
+/todo-list-angular.history/*
 
 # Miscellaneous
 /todo-list-angular/.angular/cache
@@ -40,3 +40,40 @@ yarn-error.log
 # System files
 .DS_Store
 Thumbs.db
+
+*.suo
+*.user
+*.sln.docstates
+
+[Bb]in/
+[Oo]bj/
+
+[Dd]ebug/
+[Rr]elease/
+x64/
+*_i.c
+*_p.c
+*.ilk
+*.meta
+*.obj
+*.pch
+*.pdb
+*.pgc
+*.pgd
+*.rsp
+*.sbr
+*.tlb
+*.tli
+*.tlh
+*.tmp
+*.log
+*.vspscc
+*.vssscc
+.builds
+
+.vs/
+*.sentinel
+*.pdb
+*.dll
+*.v1
+*.v2

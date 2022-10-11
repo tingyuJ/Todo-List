@@ -5,12 +5,12 @@ namespace TodoListWebAPI.Services
 {
     public class DataAccess
     {
-        private const string ConnectionString = "mongodb://127.0.0.1:27017";
-        private const string DatabaseName = "todo_list";
-        private const string UserCollection = "users";
-        private const string ListItemCollection = "list_items";
+        public const string ConnectionString = "mongodb://127.0.0.1:27017";
+        public const string DatabaseName = "todo_list";
+        public const string UserCollection = "users";
+        public const string ListItemCollection = "list_items";
 
-        private IMongoCollection<T> ConnectToMongo<T>(in string collection)
+        public IMongoCollection<T> ConnectToMongo<T>(in string collection)
         {
             var client = new MongoClient(ConnectionString);
             var db = client.GetDatabase(DatabaseName);
