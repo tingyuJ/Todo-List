@@ -95,7 +95,6 @@ export class HomeComponent implements OnInit {
   }
 
   delete(i: number) {
-    console.log('delete:', this.listItems[i]);
     this.common.post('List', 'DeleteListItem', this.listItems[i]).subscribe(() => {
       this.getList();
     }, error => {

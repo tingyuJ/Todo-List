@@ -71,9 +71,9 @@ x64/
 *.vssscc
 .builds
 
-.vs/
+TodoListWebAPI/.vs/
+TodoListWebAPI/TodoListWebAPI/[Bb]in/
 *.sentinel
-*.pdb
 *.dll
 *.v1
 *.v2

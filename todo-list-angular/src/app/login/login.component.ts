@@ -35,12 +35,13 @@ export class LoginComponent implements OnInit {
 
     this.common.post('User', 'LogInOrSignUp', this.loginForm.value).subscribe(result => {
       var res = <Response>result;
-      const username = res.value.data;
+      const username = res.value.data.userName;
+      
       if (!username) {
         this.passwordError = true;
         return;
       }
-      this.auth.setLogin(username);
+      this.auth.setLogin(username, res.value.data.token);
       // this.router.navigate(['/']);
       window.location.assign('/');
     }, error => {
