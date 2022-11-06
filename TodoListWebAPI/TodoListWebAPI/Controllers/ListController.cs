@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using MongoDB.Bson;
 using TodoListWebAPI.Models;
 using TodoListWebAPI.Services;
 

@@ -5,6 +5,8 @@ namespace TodoListWebAPI.Models
 {
     public class ListItemModel
     {
+        public string CollectionName => "ListItemCollection";
+
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
