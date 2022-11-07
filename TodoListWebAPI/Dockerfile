@@ -2,8 +2,8 @@
 
 FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
 WORKDIR /app
-EXPOSE 80
-EXPOSE 443
+# EXPOSE 80
+# EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
@@ -19,4 +19,12 @@ RUN dotnet publish "TodoListWebAPI.csproj" -c Release -o /app/publish
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
+
+EXPOSE 5000
+
 ENTRYPOINT ["dotnet", "TodoListWebAPI.dll"]
+
+# docker run -p 5000:5000 -p 5001:500 1 
+# -e ASPNETCORE_HTTP_PORT=https://+:5001 -e ASPNETCORE_URLS=http://+:5000 <image_name>
+
+# --link mongodb:mongodb  <----irrelevent

@@ -38,19 +38,22 @@ builder.Services.AddAuthorization();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+//if (app.Environment.IsDevelopment())
+//{
+//    app.UseSwagger();
+//    app.UseSwaggerUI();
+//}
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.UseCors(x => x
-    //.WithOrigins("https://localhost:4200")
-    .AllowAnyOrigin()
+    .WithOrigins("https://localhost:4200")
+    .WithOrigins("http://localhost:4200")
+    //.AllowAnyOrigin()
     .AllowAnyMethod()
     .AllowAnyHeader());
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 app.UseAuthentication();
 app.UseAuthorization();
