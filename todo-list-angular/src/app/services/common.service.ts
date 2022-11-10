@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment'
 import { AuthService } from './auth.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +10,7 @@ import { AuthService } from './auth.service';
 export class CommonService {
 
   private api = environment.WEB_API;
+  spinner!: NgxSpinnerService;
 
   constructor(
     private http: HttpClient,
@@ -32,6 +34,18 @@ export class CommonService {
       withCredentials: false,
     }
   }
+
+    // Loading effect
+    blockUI() {
+      console.log('block UI')
+      this.spinner.show();
+    }
+  
+    unBlockUI() {
+      console.log('un block UI')
+      this.spinner.hide();
+    }
+
 }
 
 export interface Response {

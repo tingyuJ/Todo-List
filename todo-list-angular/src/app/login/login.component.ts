@@ -33,6 +33,7 @@ export class LoginComponent implements OnInit {
       return;
     }
 
+    this.common.blockUI();
     this.common.post('User', 'LogInOrSignUp', this.loginForm.value).subscribe(result => {
       var res = <Response>result;
       const username = res.value.data.userName;
@@ -47,6 +48,8 @@ export class LoginComponent implements OnInit {
     }, error => {
       console.error(error);
       alert("Oops! Something is wrong...");
+    }, () => {
+      this.common.unBlockUI();
     });
   }
 }

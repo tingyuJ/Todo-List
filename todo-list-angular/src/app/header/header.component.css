@@ -4,10 +4,12 @@
     width: 50%;
     position: absolute;
     margin: 0 25%;
+    z-index: -1;
 }
 
 span {
     cursor: pointer;
+    z-index: 20;
 }
 
 .github-logo {

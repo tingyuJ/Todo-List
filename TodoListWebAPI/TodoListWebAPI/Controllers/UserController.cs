@@ -40,7 +40,11 @@ namespace TodoListWebAPI.Controllers
             }
             else
             {
+                //log in
                 var username = user.First().Password == form.Password ? user.First().UserName : null;
+                if (username == null)
+                    return  Ok(new JsonResult(new { data = new { userName = "" } }));
+                
                 var data = new
                 {
                     userName = form.UserName,

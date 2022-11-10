@@ -1,0 +1,25 @@
+version: "3"
+
+services:
+    mongo:
+        image: mongo
+
+    web-api: 
+        image: tingyu946/todo-list/web-api
+        ports:
+            - 5000:5000
+        environment:
+            ASPNETCORE_URLS: http://+:5000
+            POSTGRES_PASSWORD: postgres
+        depends_on:
+            - mongo
+        #links automatically with version 2+
+        #links:
+        # - monogodb
+        
+    todo-list:
+        image: tingyu946/todo-list/angular
+        ports:
+            - 4200:80
+        depends_on:
+            - web-api

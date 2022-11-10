@@ -21,10 +21,11 @@ WORKDIR /app
 COPY --from=publish /app/publish .
 
 EXPOSE 5000
+ENV ASPNETCORE_URLS=http://+:5000
 
 ENTRYPOINT ["dotnet", "TodoListWebAPI.dll"]
 
-# docker run -p 5000:5000 -p 5001:500 1 
-# -e ASPNETCORE_HTTP_PORT=https://+:5001 -e ASPNETCORE_URLS=http://+:5000 <image_name>
+# https://blog.miniasp.com/post/2022/05/28/Sum-up-ASPNETCORE-Environment-Variables
+# docker run -p 5000:5000 -p 5001:5001 -e ASPNETCORE_HTTP_PORT=https://+:5001 -e ASPNETCORE_URLS=http://+:5000 <image_name>
 
-# --link mongodb:mongodb  <----irrelevent
+# docker run -p 5000:5000 --link mongo:mongo <image_name>
