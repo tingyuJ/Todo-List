@@ -38,6 +38,7 @@ export class HomeComponent implements OnInit {
   }
 
   getList() {
+    this.common.blockUI();
     this.common.get('List', 'GetList/' + this.username).subscribe((result) => {
       var res = <Response>result;
       this.listItems = res.value.data;
@@ -49,6 +50,7 @@ export class HomeComponent implements OnInit {
         text: "",
       };
       this.listItems.push(emptyItem);
+      this.common.unBlockUI();
     });
   }
 

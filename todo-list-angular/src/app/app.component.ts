@@ -15,7 +15,7 @@ export class AppComponent {
     bgcolor: 'rgba(57,57,57,0.8)',
     color: '#ffffff',
     size: 'medium', // small, default, medium, large
-    type: 'ball-clip-rotate', // https://github.danielcardoso.net/load-awesome/animations.html
+    type: 'square-jelly-box', // https://github.danielcardoso.net/load-awesome/animations.html
   };
   
   constructor( 

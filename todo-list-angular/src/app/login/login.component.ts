@@ -48,8 +48,9 @@ export class LoginComponent implements OnInit {
     }, error => {
       console.error(error);
       alert("Oops! Something is wrong...");
-    }, () => {
       this.common.unBlockUI();
+    }, () => {
+      //this.common.unBlockUI();  //=> unblock after home list loaded.
     });
   }
 }
