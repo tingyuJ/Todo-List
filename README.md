@@ -1,5 +1,5 @@
 # Todo-List
-This project is build with **Angular** + **.Net Web API** + **MongoDB**.
+This project is built with **Angular** + **.Net Web API** + **MongoDB**.
 
 ## About
 I build this app to learn <strong>MongoDB</strong> and <strong>NUnit</strong>. <br>
@@ -11,7 +11,7 @@ There are 3 ways to run it locally with docker.
 2. With docker compose.
 3. Clone the repo.
 
-### 1. Run them seperately by themselves
+### 1. Run them separately by themselves
 Run the following commands:  
 ```
 docker run -d --name mongo mongo  
@@ -29,7 +29,7 @@ Play with them!! And use `docker-compose -f docker-compose-build.yml up` to buil
 <br>
 <br> 
 
-**Checkout your http://localhost:4200 to play with it after it's up and running. :thumbsup:**
+**Check out your http://localhost:4200 to play with it after it's up and running. :thumbsup:**
 
 <br> 
 
