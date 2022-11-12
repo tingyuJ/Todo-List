@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment'
 import { AuthService } from './auth.service';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,7 @@ export class CommonService {
   constructor(
     private http: HttpClient,
     private auth: AuthService,
+    private toastr: ToastrService,
   ) { }
 
   get(controller: string, action: string) {
@@ -35,16 +37,26 @@ export class CommonService {
     }
   }
 
-    // Loading effect
-    blockUI() {
-      console.log('block UI')
-      this.spinner.show();
-    }
-  
-    unBlockUI() {
-      console.log('un block UI')
-      this.spinner.hide();
-    }
+  // Loading effect
+  blockUI() {
+    this.spinner.show();
+  }
+
+  unBlockUI() {
+    this.spinner.hide();
+  }
+
+  // Show error message
+  toastrError(message?: string) {
+    if (!message) 
+      message = 'Oops! Something is wrong...';
+
+    this.toastr.error('', message, {
+      timeOut: 5000,
+      extendedTimeOut: 5000,
+      progressBar: true
+    });
+  }
 
 }
 

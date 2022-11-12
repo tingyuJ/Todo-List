@@ -1,5 +1,3 @@
-import { DatePipe } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { CommonService, Response } from '../services/common.service';
@@ -21,7 +19,6 @@ export class HomeComponent implements OnInit {
   constructor(
     private auth: AuthService,
     private common: CommonService,
-    private http: HttpClient,
   ) { }
 
   isLoggedIn: boolean = false;
@@ -50,6 +47,11 @@ export class HomeComponent implements OnInit {
         text: "",
       };
       this.listItems.push(emptyItem);
+    }, error => {
+      console.error(error);
+      this.common.unBlockUI();
+      this.common.toastrError();
+    }, () => {
       this.common.unBlockUI();
     });
   }
@@ -72,7 +74,7 @@ export class HomeComponent implements OnInit {
           this.getList();
         }, error => {
           console.error(error);
-          alert('Create failed...');
+          this.common.toastrError('Create failed...');
         });
         return;
       }
@@ -82,7 +84,7 @@ export class HomeComponent implements OnInit {
         this.getList();
       }, error => {
         console.error(error);
-        alert('Update failed...');
+        this.common.toastrError('Update failed...');
       });
 
     });
@@ -101,7 +103,7 @@ export class HomeComponent implements OnInit {
       this.getList();
     }, error => {
       console.error(error);
-      alert('Delete failed...');
+      this.common.toastrError('Delete failed...');
     });
 
   }

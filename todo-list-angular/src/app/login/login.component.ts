@@ -32,6 +32,8 @@ export class LoginComponent implements OnInit {
       this.passwordRequired = !this.loginForm.value.password;
       return;
     }
+    this.usernameRequired = false;
+    this.passwordRequired = false;
 
     this.common.blockUI();
     this.common.post('User', 'LogInOrSignUp', this.loginForm.value).subscribe(result => {
@@ -40,6 +42,7 @@ export class LoginComponent implements OnInit {
       
       if (!username) {
         this.passwordError = true;
+        this.common.unBlockUI();
         return;
       }
       this.auth.setLogin(username, res.value.data.token);
@@ -47,8 +50,8 @@ export class LoginComponent implements OnInit {
       window.location.assign('/');
     }, error => {
       console.error(error);
-      alert("Oops! Something is wrong...");
       this.common.unBlockUI();
+      this.common.toastrError();
     }, () => {
       //this.common.unBlockUI();  //=> unblock after home list loaded.
     });
