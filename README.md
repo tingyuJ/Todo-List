@@ -19,7 +19,7 @@ docker run -d -p 5000:5000 --link mongo:mongo tingyu946/todo-list-web-api
 docker run -p 4200:80 tingyu946/todo-list-angular
 ```
 ### 2. With docker compose
-Copy the [docker-compose.yml](https://github.com/tingyuJ/Todo-List/blob/master/docker-compose.yml") file and run the command:  
+Copy the [docker-compose.yml](https://github.com/tingyuJ/Todo-List/blob/master/docker-compose.yml) file and run the command:  
 `docker-compose -f docker-compose.yml up`
 <br>
 <br>
