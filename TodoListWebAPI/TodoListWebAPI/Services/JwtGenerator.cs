@@ -9,13 +9,11 @@ namespace TodoListWebAPI.Services
     //https://blog.miniasp.com/post/2022/02/13/How-to-use-JWT-token-based-auth-in-aspnet-core-60
     public class JwtGenerator
     {
-        private readonly IConfiguration _configuration;
         private readonly JwtSettings _jwtSettings;
 
         public JwtGenerator(IConfiguration configuration)
         {
-            _configuration = configuration;
-            _jwtSettings = _configuration.GetSection("JwtSettings").Get<JwtSettings>();
+            _jwtSettings = configuration.GetSection("JwtSettings").Get<JwtSettings>();
         }
 
         public string GenerateJwtToken(string userName)
