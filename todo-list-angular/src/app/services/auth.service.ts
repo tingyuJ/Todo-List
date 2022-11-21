@@ -8,8 +8,8 @@ import { Router } from '@angular/router';
 export class AuthService {
 
   private _storage = sessionStorage;
-  private KEY_USERNAME = "todo_list_username";
-  private KEY_TOKEN = "todo_list_token";
+  private KEY_USERNAME = 'todo_list_username';
+  private KEY_TOKEN = 'todo_list_token';
 
   constructor(
     private http: HttpClient,
@@ -28,9 +28,9 @@ export class AuthService {
 
   // ======================== getter ========================
   get username(): string {
-    return this._storage.getItem(this.KEY_USERNAME) ?? "";
+    return this._storage.getItem(this.KEY_USERNAME) ?? '';
   }
   get accessToken(): string {
-    return this._storage.getItem(this.KEY_TOKEN) ?? "";
+    return this._storage.getItem(this.KEY_TOKEN) ?? '';
   }
 }

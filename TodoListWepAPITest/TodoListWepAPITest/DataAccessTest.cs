@@ -7,7 +7,7 @@ using MongoDB.Driver;
 using NUnit.Framework;
 using TodoListWebAPI.Services;
 using TodoListWebAPI.Models;
-using TodoListWebAPI.Models.Settings;
+using TodoListWebAPI.Common.Settings;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore;

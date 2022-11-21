@@ -20,11 +20,11 @@ export class CommonService {
   ) { }
 
   get(controller: string, action: string) {
-    return this.http.get(this.api + "/" + controller + "/" + action, this.getHttpOption())
+    return this.http.get(this.api + '/' + controller + '/' + action, this.getHttpOption())
   }
 
   post(controller: string, action: string, data: any) {
-    return this.http.post(this.api + "/" + controller + "/" + action, data, this.getHttpOption())
+    return this.http.post(this.api + '/' + controller + '/' + action, data, this.getHttpOption())
   }
 
   getHttpOption() {

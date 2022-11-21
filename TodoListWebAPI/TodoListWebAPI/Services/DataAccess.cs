@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 using TodoListWebAPI.Models;
-using TodoListWebAPI.Models.Settings;
+using TodoListWebAPI.Common.Settings;
 
 namespace TodoListWebAPI.Services
 {

@@ -37,6 +37,8 @@
 /todo-list-angulartestem.log
 /todo-list-angular/typings
 
+/todo-list-angular/dist/
+
 # System files
 .DS_Store
 Thumbs.db
@@ -77,3 +79,5 @@ TodoListWebAPI/TodoListWebAPI/[Bb]in/
 *.dll
 *.v1
 *.v2
+
+.vs/

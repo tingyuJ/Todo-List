@@ -2,7 +2,7 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using TodoListWebAPI.Models.Settings;
+using TodoListWebAPI.Common.Settings;
 
 namespace TodoListWebAPI.Services
 {

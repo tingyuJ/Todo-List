@@ -9,7 +9,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 })
 export class AppComponent {
 
-  title = "todo-list-angular";
+  title = 'todo-list-angular';
 
   ngx: any = {
     bgcolor: 'rgba(57,57,57,0.8)',

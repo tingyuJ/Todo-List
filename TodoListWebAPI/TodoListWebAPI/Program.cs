@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using TodoListWebAPI.Models.Settings;
+using TodoListWebAPI.Common.Settings;
 using TodoListWebAPI.Services;
 
 var builder = WebApplication.CreateBuilder(args);

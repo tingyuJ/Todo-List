@@ -5,8 +5,6 @@ VisualStudioVersion = 17.1.32210.238
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TodoListWebAPI", "TodoListWebAPI\TodoListWebAPI.csproj", "{27999CFC-F142-4039-837B-260AED16E031}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TodoListWepAPITest", "..\TodoListWepAPITest\TodoListWepAPITest\TodoListWepAPITest.csproj", "{04D50C39-A053-40A4-838E-D1C247898B07}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,10 +15,6 @@ Global
 		{27999CFC-F142-4039-837B-260AED16E031}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{27999CFC-F142-4039-837B-260AED16E031}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{27999CFC-F142-4039-837B-260AED16E031}.Release|Any CPU.Build.0 = Release|Any CPU
-		{04D50C39-A053-40A4-838E-D1C247898B07}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{04D50C39-A053-40A4-838E-D1C247898B07}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{04D50C39-A053-40A4-838E-D1C247898B07}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{04D50C39-A053-40A4-838E-D1C247898B07}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

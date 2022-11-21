@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using TodoListWebAPI.Common;
 using TodoListWebAPI.Models;
 using TodoListWebAPI.Services;
 
@@ -24,10 +25,17 @@ namespace TodoListWebAPI.Controllers
 
         [HttpGet]
         [Route("{username}")]
-        public async Task<IActionResult> GetList(string username)
+        public async Task<Response> GetList(string username)
         {
-            var list = await _db.GetList(username);
-            return Ok(new JsonResult(new { data = list }));
+            try
+            {
+                var list = await _db.GetList(username);
+                return new Response(list);
+            } 
+            catch (Exception ex)
+            {
+                return new Response(500, "Error", ex);
+            }
         }
 
         [HttpPost]

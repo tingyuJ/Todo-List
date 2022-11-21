@@ -2,7 +2,8 @@ import { Component, EnvironmentInjector, OnInit, ViewChild } from '@angular/core
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
-import { CommonService, Response } from '../services/common.service';
+import { CommonService } from '../../services/common.service';
+import { Response } from '../../common/scheme';
 
 @Component({
   selector: 'app-login',
@@ -38,14 +39,15 @@ export class LoginComponent implements OnInit {
     this.common.blockUI();
     this.common.post('User', 'LogInOrSignUp', this.loginForm.value).subscribe(result => {
       var res = <Response>result;
-      const username = res.value.data.userName;
       
-      if (!username) {
+      if (res.statusCode === 400) {
         this.passwordError = true;
+        this.common.toastrError('PASSWORD IS INCORRECT.');
         this.common.unBlockUI();
         return;
       }
-      this.auth.setLogin(username, res.value.data.token);
+
+      this.auth.setLogin(res.data.userName, res.data.token);
       // this.router.navigate(['/']);
       window.location.assign('/');
     }, error => {

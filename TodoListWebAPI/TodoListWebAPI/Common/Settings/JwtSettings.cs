@@ -1,4 +1,4 @@
-﻿namespace TodoListWebAPI.Models.Settings
+﻿namespace TodoListWebAPI.Common.Settings
 {
     public class JwtSettings
     {

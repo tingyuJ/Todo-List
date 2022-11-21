@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../services/auth.service';
-import { CommonService, Response } from '../services/common.service';
+import { AuthService } from '../../services/auth.service';
+import { CommonService } from '../../services/common.service';
+import { Response } from '../../common/scheme';
 
 interface ListItem {
   id: string;
@@ -22,7 +23,7 @@ export class HomeComponent implements OnInit {
   ) { }
 
   isLoggedIn: boolean = false;
-  username: string = "";
+  username: string = '';
   listItems: ListItem[] = [];
   currentRow: number = -1;
 
@@ -34,19 +35,28 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  getList() {
+  private getList() {
     this.common.blockUI();
     this.common.get('List', 'GetList/' + this.username).subscribe((result) => {
       var res = <Response>result;
-      this.listItems = res.value.data;
+
+      if (res.statusCode !== 200) {
+        console.error(res.data);
+        this.common.unBlockUI();
+        this.common.toastrError();
+        return;
+      }
+
+      this.listItems = res.data;
 
       const emptyItem: ListItem = {
-        id: "",
+        id: '',
         username: this.username,
         checked: null,
-        text: "",
+        text: '',
       };
       this.listItems.push(emptyItem);
+      
     }, error => {
       console.error(error);
       this.common.unBlockUI();
