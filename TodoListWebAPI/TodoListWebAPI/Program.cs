@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using TodoListWebAPI.Common.Settings;
+using TodoListWebAPI.Interfaces;
 using TodoListWebAPI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,8 +15,8 @@ builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddSingleton<JwtGenerator>();
-builder.Services.AddSingleton<DataAccess>();
+builder.Services.AddSingleton<IJwtGenerator, JwtGenerator>();
+builder.Services.AddSingleton<IDataAccess, DataAccess>();
 builder.Services.Configure<MongoDbSettings>(builder.Configuration.GetSection(MongoDbSettings.DbSettings));
 
 builder.Services

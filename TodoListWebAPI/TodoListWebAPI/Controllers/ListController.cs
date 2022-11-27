@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TodoListWebAPI.Common;
+using TodoListWebAPI.Interfaces;
 using TodoListWebAPI.Models;
 using TodoListWebAPI.Services;
 
@@ -12,11 +13,11 @@ namespace TodoListWebAPI.Controllers
     public class ListController : ControllerBase
     {
         private readonly ILogger<ListController> _logger;
-        private DataAccess _db;
+        private IDataAccess _db;
 
         public ListController(
             ILogger<ListController> logger,
-            DataAccess db
+            IDataAccess db
         )
         {
             _logger = logger;

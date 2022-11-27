@@ -11,6 +11,8 @@ using TodoListWebAPI.Common.Settings;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore;
+using TodoListWebAPI.Common.Attributes;
+using TodoListWebAPI.Interfaces;
 
 namespace TodoListWepAPITest
 {
@@ -20,7 +22,7 @@ namespace TodoListWepAPITest
         private IConfiguration _config;
         static IWebHost _webHost;
         private MongoDbSettings _dbSettings;
-        private DataAccess _db;
+        private IDataAccess _db;
 
         #region Utils
 
@@ -34,15 +36,15 @@ namespace TodoListWepAPITest
             _webHost = WebHost.CreateDefaultBuilder()
                 .ConfigureServices(services =>
                 {
-                    services.AddSingleton<DataAccess>();
-                    services.AddSingleton<JwtGenerator>();
+                    services.AddSingleton<IDataAccess, DataAccess>();
+                    services.AddSingleton<IJwtGenerator, JwtGenerator>();
                     services.Configure<MongoDbSettings>(_config.GetSection(MongoDbSettings.DbSettings));
                 })
                 .Configure(app => { })
                 .Build();
 
             _dbSettings = _config.GetSection(MongoDbSettings.DbSettings).Get<MongoDbSettings>();
-            _db = GetService<DataAccess>();
+            _db = GetService<IDataAccess>();
         }
 
         private T GetService<T>()
@@ -53,13 +55,10 @@ namespace TodoListWepAPITest
 
         private IMongoCollection<T> ConnectToMongo<T>()
         {
-            var client = new MongoClient(_dbSettings.ConnectionString);
-            var db = client.GetDatabase(_dbSettings.DatabaseName);
+            var db = new MongoClient(_dbSettings.ConnectionString).GetDatabase(_dbSettings.DatabaseName);
+            var collectionName = (MongoCollectionAttribute)typeof(T).GetCustomAttributes(typeof(MongoCollectionAttribute), true).First();
 
-            var model = Activator.CreateInstance<T>();
-            var collection = (string)model.GetType().GetProperty("CollectionName").GetValue(model, null);
-
-            return db.GetCollection<T>(collection);
+            return db.GetCollection<T>(collectionName.CollectionName);
         }
 
         #endregion
@@ -117,13 +116,13 @@ namespace TodoListWepAPITest
         #region User
 
         [Test]
-        [TestCase("test999", 1, TestName = "Get test user 999")]
-        [TestCase("test100", 0, TestName = "Get test user 100")]
-        public async Task GetUser(string username, int count)
+        [TestCase("test999", true, TestName = "Get test user 999")]
+        [TestCase("test100", false, TestName = "Get test user 100")]
+        public async Task GetUser(string username, bool found)
         {
             var result = await _db.GetUser(username);
 
-            Assert.AreEqual(count, result.Count);
+            Assert.AreEqual(found, result != default);
         }
 
         [Test]
@@ -137,12 +136,12 @@ namespace TodoListWepAPITest
             };
 
             var before = await _db.GetUser("test30");
-            Assert.AreEqual(0, before.Count);
+            Assert.IsTrue(before == null);
 
             await _db.CreateUser(user);
 
             var after = await _db.GetUser("test30");
-            Assert.AreEqual(1, after.Count);
+            Assert.IsTrue(after != null);
         }
 
         #endregion
@@ -155,7 +154,7 @@ namespace TodoListWepAPITest
         {
             var list = await _db.GetList(username);
 
-            Assert.AreEqual(itemCount, list.Count);
+            Assert.AreEqual(itemCount, list.Count());
         }
 
         [Test]

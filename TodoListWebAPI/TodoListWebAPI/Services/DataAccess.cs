@@ -1,37 +1,36 @@
 ﻿using Microsoft.Extensions.Options;
 using MongoDB.Driver;
+using TodoListWebAPI.Common.Attributes;
 using TodoListWebAPI.Models;
 using TodoListWebAPI.Common.Settings;
+using TodoListWebAPI.Interfaces;
 
 namespace TodoListWebAPI.Services
 {
-    public class DataAccess
+    internal sealed class DataAccess : IDataAccess
     {
-        private readonly MongoDbSettings _dbSettings;
+        private readonly IMongoDatabase _db;
 
         public DataAccess(IOptions<MongoDbSettings> options)
         {
-            _dbSettings = options.Value;
+            var dbSettings = options.Value;
+            _db = new MongoClient(dbSettings.ConnectionString).GetDatabase(dbSettings.DatabaseName);
         }
 
         private IMongoCollection<T> ConnectToMongo<T>()
         {
-            var client = new MongoClient(_dbSettings.ConnectionString);
-            var db = client.GetDatabase(_dbSettings.DatabaseName);
+            var collectionName = (MongoCollectionAttribute)typeof(T).GetCustomAttributes(typeof(MongoCollectionAttribute), true).First();
 
-            var model = Activator.CreateInstance<T>();
-            var collection = (string)model.GetType().GetProperty("CollectionName").GetValue(model, null);
-
-            return db.GetCollection<T>(collection);
+            return _db.GetCollection<T>(collectionName.CollectionName);
         }
 
         #region User
 
-        public async Task<List<UserModel>> GetUser(string username)
+        public async Task<UserModel> GetUser(string username)
         {
             var usersCollection = ConnectToMongo<UserModel>();
-            var results = await usersCollection.FindAsync(u => u.UserName == username);
-            return results.ToList();
+            var results = await usersCollection.Find(u => u.UserName == username).Limit(1).FirstOrDefaultAsync();
+            return results;
         }
 
         public Task CreateUser(UserModel user)
@@ -44,11 +43,11 @@ namespace TodoListWebAPI.Services
 
         #region List
 
-        public async Task<List<ListItemModel>> GetList(string username)
+        public async Task<IEnumerable<ListItemModel>> GetList(string username)
         {
             var listItemsCollection = ConnectToMongo<ListItemModel>();
             var results = await listItemsCollection.FindAsync(li => li.UserName == username);
-            return results.ToList();
+            return results.ToEnumerable();
         }
 
         public Task UpdateListItem(ListItemModel item)

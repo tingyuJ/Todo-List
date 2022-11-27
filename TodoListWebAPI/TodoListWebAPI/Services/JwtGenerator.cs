@@ -3,11 +3,12 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using TodoListWebAPI.Common.Settings;
+using TodoListWebAPI.Interfaces;
 
 namespace TodoListWebAPI.Services
 {
     //https://blog.miniasp.com/post/2022/02/13/How-to-use-JWT-token-based-auth-in-aspnet-core-60
-    public class JwtGenerator
+    internal sealed class JwtGenerator : IJwtGenerator
     {
         private readonly JwtSettings _jwtSettings;
 
